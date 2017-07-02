@@ -2,6 +2,8 @@
 
 Shodanwave is a tool for exploring and obtaining information from cameras specifically Netwave IP Camera. The tool uses a search engine called shodan that makes it easy to search for cameras online but not only that.
 
+Hack network cameras around the world, Very fun!
+
 What does the tool to? Look, a list!
 
  * Search 
