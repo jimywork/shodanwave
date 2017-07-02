@@ -17,6 +17,7 @@ Here is an example of shodan wave running ...
 ```
 
 Usage: python shodanwave.py -u usernames.txt -w passwords.txt  -k Shodan API key
+       python shodanwave.py --help 
          __              __                                   
    _____/ /_  ____  ____/ /___ _____ _      ______ __   _____ 
   / ___/ __ \/ __ \/ __  / __ `/ __ \ | /| / / __ `/ | / / _ \
