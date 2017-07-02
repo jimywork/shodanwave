@@ -41,8 +41,8 @@ Information the use of this tool is illegal, not bad.
 [+] Country: n/a
 [+] Organization: Nettel Telecomunicações Ltda.
 [+] Product: Netwave IP camera http config
-[+] SSID moslekok
-[+] WPAPSK TulSokanLoptatok
+[+] SSID: moslekok
+[+] WPAPSK: TulSokanLoptatok
 [+] Starting to read memory dump.. this could take a few minutes
 [+] CTRL+C to exit..
 [+] Binary data: 70560
