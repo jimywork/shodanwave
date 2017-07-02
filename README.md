@@ -31,7 +31,7 @@ Information the use of this tool is illegal, not bad.
 [+] Shodan Exploit Enabled.
 [+] Netwave IP Camera Found: 111307
 [+] Passwords loaded: 12
-[!] Disable password discovery module? (S/n): n
+[1] Disable password discovery module? (S/n): N
 [+] Launching brute force on host http://186.193.55.18:8080
 [!] Password not found
 [!] Getting System Information
