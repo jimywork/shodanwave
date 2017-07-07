@@ -9,6 +9,7 @@ What does the tool to? Look, a list!
  * Search 
  * Brute force
  * SSID and WPAPSK Password Disclosure
+ * E-mail, FTP, DNS, MSN Password Disclosure 
  * Exploit
 
 
