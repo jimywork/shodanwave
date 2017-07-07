@@ -251,7 +251,7 @@ def main() :
                 pass
        signal.pause()
      except:
-      print (bgcolors.FAIL+"[-] Victim isnt vulnerable for a memory leak, exiting.."+bgcolors.ENDC)
+      print (bgcolors.FAIL+ "[-] Victim isnt vulnerable for a memory leak, exiting.."+bgcolors.ENDC)
     return True
   except shodan.APIError as e:
    print(bgcolors.FAIL + "[-] Error: %s" % (e) + bgcolors.ENDC)
