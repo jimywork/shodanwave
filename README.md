@@ -13,7 +13,7 @@ What does the tool to? Look, a list!
  * Exploit
 
 
-Here is an example of shodan wave running ...
+Here is an example of shodan wave running and showing the full output...
 
 ```
 
