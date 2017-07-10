@@ -63,6 +63,7 @@ Information the use of this tool is illegal, not bad.
 ```
 pip install -r /path/to/requirements.txt
 ```
+You need the API key to run. You can get a key free on https://www.shodan.io/
 
 ### References:
 
