@@ -1,4 +1,4 @@
-# Shodonwave 
+# Shodanwave 
 
 Shodanwave is a tool for exploring and obtaining information from cameras specifically Netwave IP Camera. The tool uses a search engine called shodan that makes it easy to search for cameras online but not only that.
 
