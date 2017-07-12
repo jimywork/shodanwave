@@ -53,6 +53,9 @@ optional arguments:
                         Shodan API key
 
 ```
+### Attention
+Use this tool wisely and not for evil. To get the best performece of this tool you need to pay for shodan to get full API access
+
 ### References:
 
  * [Shodan API](https://www.shodan.io/)  search engine for Internet-connected devices.
