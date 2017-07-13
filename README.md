@@ -11,6 +11,7 @@ What does the tool to? Look, a list!
  * Exploit
  
 This is an example of shodan wave running, the password was not found through raw force so the tool tries to leak the camera's memory. If the tool finds the password it does not try to leak the memory.
+
 [![asciicast](https://asciinema.org/a/G7gVOiReMiv43V8wlMbB4mm9B.png)](https://asciinema.org/a/G7gVOiReMiv43V8wlMbB4mm9B?autoplay=1)
 
 ### How to use?
