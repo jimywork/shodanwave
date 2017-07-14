@@ -115,11 +115,11 @@ def main() :
 
      host = hosts.get('ip_str')
      port = hosts.get('port')
-     country = hosts.get('country', 'n/a')
+     city = hosts['location']['city'] or 'n/a'
+     country = hosts['location']['country_name'] or 'n/a'
      org = hosts.get('org', 'n/a')
      hostnames = hosts.get('hostnames', 'n/a')
      product = hosts.get('product', 'n/a')
-
 
      try:
 
@@ -247,7 +247,7 @@ def main() :
      except Exception as e:
       print("Error : %s" % (e))
 
-     print("""[+] Host: http://%s:%s\n[+] Country: %s\n[+] Organization: %s\n[+] Product: %s""" % (host, port, country, org, product))
+     print("""[+] Host: http://%s:%s\n[+] Country: %s\n[+] City: %s\n[+] Organization: %s\n[+] Product: %s""" % (host, port, country, city, org, product))
 
      try:
 
