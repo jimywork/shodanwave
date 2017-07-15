@@ -43,11 +43,14 @@ def main() :
  parser.add_argument('-u','--username', dest="username",  type=file, help='Select your usernames wordlist')
  parser.add_argument('-w','--wordlist', dest="password",  type=file, help='Select your passwords wordlist')
  parser.add_argument('-k','--shodan', dest="address", default='', type=str, help='Shodan API key')
+ parser.add_argument('-t','--output', dest="output", default='', type=str, help='Log File')
  parser.add_argument('-l','--limit', dest="limit", default='100', type=str, help='Limit the number of registers responsed by Shodan')
  parser.add_argument('-o','--offset', dest="offset", default='1', type=str, help='Shodan skips this number of registers from response')
 
  args = parser.parse_args()
-
+ filename = args.output
+  
+ global filename
 
  try:
 
@@ -71,7 +74,7 @@ def main() :
  signal.signal(signal.SIGINT, signal_handler)
 
  def NetworkSearchosts():
-
+  
   exploit = True
   found = False
 
@@ -100,7 +103,7 @@ def main() :
 
    usernames = args.username.readlines()
    passwords = args.password.readlines()
-
+   
    print(backgroundColor.OKGREEN + "[+] Shodan successfully Connected."+ backgroundColor.ENDC)
    print(backgroundColor.OKGREEN + "[+] Netwave Exploit Enabled."+ backgroundColor.ENDC)
    print(backgroundColor.OKGREEN + "[+] Netwave IP Camera Found: %d" % (total) + backgroundColor.ENDC)
@@ -251,6 +254,7 @@ def main() :
       print("Error : %s" % (e))
 
      print("""[+] Host: http://%s:%s\n[+] Country: %s\n[+] City: %s\n[+] Organization: %s\n[+] Product: %s""" % (host, port, country, city, org, product))
+     log(host, port, country, city, org, product)
 
      try:
 
@@ -328,6 +332,16 @@ def main() :
    sys.exit(0)
 
  NetworkSearchosts()
+
+
+
+def log(host, port, country, city, org, product):
+ file = open(filename, 'a')
+ file.write("Host: http://" + host +":"+ str(port) + "\n" + "Country: "+ country +"\n" + "City: "+ city +"\n" + "Organization: " + org +"\n"+"Product: "+ product + "\n")
+ file.write("*****************" + "\n")
+ file.close()
+
+
 
 if __name__ == "__main__" :
  main()
