@@ -1,5 +1,7 @@
 #!/usr/bin/python2.7
 
+# -*- coding: utf-8 -*-
+
 import argparse
 import sys,os,time
 import subprocess
@@ -44,13 +46,13 @@ def main() :
  parser.add_argument('-w','--wordlist', dest="password",  type=file, help='Select your passwords wordlist')
  parser.add_argument('-k','--shodan', dest="address", default='', type=str, help='Shodan API key')
  parser.add_argument('-t','--output', dest="output", default='', type=str, help='Log File')
- parser.add_argument('-l','--limit', dest="limit", default='100', type=str, help='Limit the number of registers responsed by Shodan')
- parser.add_argument('-o','--offset', dest="offset", default='1', type=str, help='Shodan skips this number of registers from response')
+ parser.add_argument('-l','--limit', dest="limit", type=str, help='Limit the number of registers responsed by Shodan')
+ parser.add_argument('-o','--offset', dest="offset", type=str, help='Shodan skips this number of registers from response')
 
  args = parser.parse_args()
- filename = args.output
-  
+
  global filename
+ filename = args.output
 
  try:
 
@@ -254,6 +256,7 @@ def main() :
       print("Error : %s" % (e))
 
      print("""[+] Host: http://%s:%s\n[+] Country: %s\n[+] City: %s\n[+] Organization: %s\n[+] Product: %s""" % (host, port, country, city, org, product))
+
      log(host, port, country, city, org, product)
 
      try:
@@ -336,8 +339,10 @@ def main() :
 
 
 def log(host, port, country, city, org, product):
+
  file = open(filename, 'a')
- file.write("Host: http://" + host +":"+ str(port) + "\n" + "Country: "+ country +"\n" + "City: "+ city +"\n" + "Organization: " + org +"\n"+"Product: "+ product + "\n")
+ out = "[+] Host: http://%s:%s\n[+] Country: %s\n[+] City: %s\n[+] Organization: %s\n[+] Product: %s\n" % (host, port, country, city, org, product)
+ file.write(out.encode('utf-8'))
  file.write("*****************" + "\n")
  file.close()
 
