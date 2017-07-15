@@ -55,6 +55,8 @@ optional arguments:
                         Limit the number of registers responsed by Shodan
   -o OFFSET, --offset OFFSET
                         Shodan skips this number of registers from response
+  -t OUTPUT, --output OUTPUT
+                        Save the results
 
 
 ```
