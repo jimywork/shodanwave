@@ -15,7 +15,7 @@ This is an example of shodan wave running, the password was not found through ra
 [![asciicast](https://asciinema.org/a/G7gVOiReMiv43V8wlMbB4mm9B.png)](https://asciinema.org/a/G7gVOiReMiv43V8wlMbB4mm9B?autoplay=1)
 
 ### How to use?
-To use shodan wave you need an api key you can get a free one at https://www.shodan.io/, then you need to follow the following steps.
+To use shodanwave you need an api key which you can get for free at https://www.shodan.io/, then you need to follow the next steps.
 
 ### Installation
 
@@ -51,10 +51,16 @@ optional arguments:
                         Select your passwords wordlist
   -k ADDRESS, --shodan ADDRESS
                         Shodan API key
+  -l LIMIT, --limit LIMIT
+                        Limit the number of registers responsed by Shodan
+  -o OFFSET, --offset OFFSET
+                        Shodan skips this number of registers from response
+
 
 ```
 ### Attention
 Use this tool wisely and not for evil. To get the best performece of this tool you need to pay for shodan to get full API access
+Options --limit and --offset may need a paying API key and consume query credits from your Shodan account.
 
 ### References:
 
