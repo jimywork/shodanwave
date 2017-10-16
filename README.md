@@ -27,7 +27,7 @@ $ pip install -r requirements.txt
 ```
 ### Usage
 ```
-Usage: python shodanwave.py -u usernames.txt -w passwords.txt  -k Shodan API key
+Usage: python shodanwave.py -u usernames.txt -w passwords.txt  -k Shodan API key --t OUTPUT
        python shodanwave.py --help 
          __              __                                   
    _____/ /_  ____  ____/ /___ _____ _      ______ __   _____ 
