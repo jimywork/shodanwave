@@ -57,10 +57,9 @@ def main() :
  try:
 
   if sys.argv[2] == "-h" or sys.argv[2] == "--help":
-   print "Usage: python shodanwave.py --help"
+   # print "Usage: python shodanwave.py --help"
    sys.exit(0)
  except Exception as e:
-   print("%s" % (backgroundColor.WARNING + GraphRender + backgroundColor.ENDC))
    print "Usage: python shodanwave.py --help"
    sys.exit(0)
 
@@ -229,7 +228,7 @@ def main() :
         exploit = True
         print(backgroundColor.FAIL + backgroundColor.BOLD + "[!] Password not found" + backgroundColor.ENDC)
      except Exception as e:
-      print("Error")
+      print(backgroundColor.FAIL + "[!] Error" + backgroundColor.ENDC)
 
      print(backgroundColor.WARNING + "[!] Getting System Information" + backgroundColor.ENDC)
      print(backgroundColor.WARNING + "[!] Getting Wireless System Information" +backgroundColor.ENDC)
@@ -254,7 +253,7 @@ def main() :
       else:
         print(backgroundColor.FAIL + "[-] Getting mac address" + backgroundColor.ENDC)
      except Exception as e:
-      print("Error")
+      print(backgroundColor.FAIL + "[!] Error" + backgroundColor.ENDC)
 
      print("""[+] Host: http://%s:%s\n[+] Country: %s\n[+] City: %s\n[+] Organization: %s\n[+] Product: %s""" % (host, port, country, city, org, product))
 
@@ -279,7 +278,7 @@ def main() :
       else:
        print(backgroundColor.FAIL + backgroundColor.BOLD + "[!] Wireless lan is disabled.."+ backgroundColor.ENDC)
      except Exception as e:
-      print(backgroundColor.FAIL + "[!] Error: %s \nWireless lan is disabled.." % (e) + backgroundColor.ENDC)
+      print(backgroundColor.FAIL + "[!] Error: Wireless lan is disabled.." + backgroundColor.ENDC)
 
      try:
 
