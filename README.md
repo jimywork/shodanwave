@@ -64,6 +64,17 @@ optional arguments:
 Use this tool wisely and not for evil. To get the best performece of this tool you need to pay for shodan to get full API access
 Options --limit and --offset may need a paying API key and consume query credits from your Shodan account.
 
+### Disclaimer
+Code samples are provided for educational purposes. Adequate defenses can only be built by researching attack techniques available to malicious actors. Using this code against target systems without prior permission is illegal in most jurisdictions. The authors are not liable for any damages from misuse of this information or code.
+
+
+## Donations
+* XMR: `49m12JEEC6HPCHkLMX5QL4SrDQdKwh6eb4Muu8Z9CwA9MwemhzFQ3VcgHwyuR73rC22WCymTUyep7DVrfN3GPt5JBCekPrR `
+
+## Contacts
+* evilsockett@gmail.com
+* [twitter](https://www.twitter.com/evilsockett)
+
 ### References:
 
  * [Shodan API](https://www.shodan.io/)  search engine for Internet-connected devices.
