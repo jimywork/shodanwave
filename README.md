@@ -72,7 +72,7 @@ Code samples are provided for educational purposes. Adequate defenses can only b
 * XMR: `49m12JEEC6HPCHkLMX5QL4SrDQdKwh6eb4Muu8Z9CwA9MwemhzFQ3VcgHwyuR73rC22WCymTUyep7DVrfN3GPt5JBCekPrR `
 
 ## Contacts
-* evilsockett@gmail.com
+* evilsocketbr@gmail.com
 * [twitter](https://www.twitter.com/evilsockett)
 
 ### References:
