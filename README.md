@@ -73,7 +73,7 @@ Code samples are provided for educational purposes. Adequate defenses can only b
 
 ## Contacts
 * evilsocketbr@gmail.com
-* [twitter](https://www.twitter.com/evilsockett)
+* [twitter](https://www.twitter.com/evilsocketbr)
 
 ### References:
 
