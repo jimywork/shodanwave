@@ -71,11 +71,11 @@ Code samples are provided for educational purposes. Adequate defenses can only b
 
 ### Required if using Proxy!!!
 Modify your Tsocks config!!
-Add/Modify the following at the bottom:
-server = <Your Tor Port> 
-server_type = <4 or 5> 
-server_port = <Your Tor Port>
-default_pass = <your Pass> (Might be required for proxy)
+* Add/Modify the following at the bottom:
+* server = <Your Tor Port> 
+* server_type = <4 or 5> 
+* server_port = <Your Tor Port>
+* default_pass = <your Pass> (Might be required for proxy)
 
 ## Donations
 * XMR: `49m12JEEC6HPCHkLMX5QL4SrDQdKwh6eb4Muu8Z9CwA9MwemhzFQ3VcgHwyuR73rC22WCymTUyep7DVrfN3GPt5JBCekPrR `
