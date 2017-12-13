@@ -79,11 +79,6 @@ Modify your Tsocks config!!
 
 ## Donations
 * XMR: `49m12JEEC6HPCHkLMX5QL4SrDQdKwh6eb4Muu8Z9CwA9MwemhzFQ3VcgHwyuR73rC22WCymTUyep7DVrfN3GPt5JBCekPrR `
-
-## Contacts
-* evilsocketbr@gmail.com
-* [twitter](https://www.twitter.com/evilsocketbr)
-
 ### References:
 
  * [Shodan API](https://www.shodan.io/)  search engine for Internet-connected devices.
