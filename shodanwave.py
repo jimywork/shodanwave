@@ -168,7 +168,7 @@ def main() :
         
         headers = {'User-Agent': "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.94 Safari/537.36" }
         
-        if toggle_tor == True :
+        if tor_toggle == True :
            request = requests.get(url, auth=(administrator, password), headers=headers, proxies=proxies, timeout=1)
         else :
            request = requests.get(url, auth=(administrator, password), headers=headers, timeout=0.3)
